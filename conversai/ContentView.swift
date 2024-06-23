@@ -28,7 +28,7 @@ struct ContentView: View {
 
     private let speechRecognizer = SFSpeechRecognizer()
     private let audioEngine = AVAudioEngine()
-    public var openAI = SwiftOpenAI(apiKey: "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")
+    public var openAI = SwiftOpenAI(apiKey: "")
     
     var body: some View {
         VStack(spacing: 20) {
