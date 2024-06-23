@@ -95,7 +95,6 @@ struct HomeView: View {
     private func loginUser(email: String, password: String) {
         isAuthenticating = true
         DispatchQueue.global().async {
-            // Simulate a network delay
             sleep(1)
             DispatchQueue.main.async {
                 self.isAuthenticating = false
@@ -112,12 +111,10 @@ struct HomeView: View {
     private func createUser(email: String, password: String) {
         isAuthenticating = true
         DispatchQueue.global().async {
-            // Simulate a network delay
             sleep(1)
             DispatchQueue.main.async {
                 self.isAuthenticating = false
                 UserDefaults.standard.set(password, forKey: email)
-                // Save credentials on successful account creation
                 KeychainManager.saveCredentials(email: email, password: password)
                 self.isAuthenticated = true
             }
@@ -162,7 +159,6 @@ struct HomeView: View {
         if let credentials = KeychainManager.retrieveCredentials() {
             self.email = credentials.email
             self.password = credentials.password
-            // Use the retrieved credentials to login
             loginUser(email: self.email, password: self.password)
         } else {
             self.errorMessage = "Could not retrieve credentials"

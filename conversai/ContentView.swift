@@ -28,7 +28,7 @@ struct ContentView: View {
 
     private let speechRecognizer = SFSpeechRecognizer()
     private let audioEngine = AVAudioEngine()
-    public var openAI = SwiftOpenAI(apiKey: "")
+    public var openAI = SwiftOpenAI(apiKey: "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")
     
     var body: some View {
         VStack(spacing: 20) {
@@ -170,7 +170,7 @@ struct ContentView: View {
             case .openAI:
                 response = await generateChatResponse(inputText: lastFiftyWords)
             case .cohere:
-                response = await callSpeechHelpAPI(inputText: lastFiftyWords)
+                response = await APIHelper.callSpeechHelpAPI(inputText: lastFiftyWords)
             }
             let lines = response.split(separator: "\n").map(String.init)
             let cleanedLines = lines.map(cleanLine)
@@ -266,28 +266,7 @@ struct ContentView: View {
             .filter { !$0.isPunctuation }
     }
 
-    private func callSpeechHelpAPI(inputText: String) async -> String {
-        guard let url = URL(string: "https://jf7n4wdqn1.execute-api.us-east-1.amazonaws.com/dev/speechHelp?prompt=\(inputText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")") else {
-            return ""
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        
-        do {
-            let (data, _) = try await URLSession.shared.data(for: request)
-            if let jsonResponse = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-               let body = jsonResponse["body"] as? [String: Any],
-               let generations = body["generations"] as? [[String: Any]],
-               let text = generations.first?["text"] as? String {
-                return text
-            }
-        } catch {
-            print("Error: \(error)")
-        }
-        
-        return ""
-    }
+    
 
     func generateChatResponse(inputText: String) async -> String {
         let messages: [MessageChatGPT] = [
@@ -380,7 +359,7 @@ struct ContentView: View {
         case .openAI:
             response = await generateChatResponse(inputText: prompt)
         case .cohere:
-            response = await callSpeechHelpAPI(inputText: prompt)
+            response = await APIHelper.callSpeechHelpAPI(inputText: prompt)
         }
         questionText = response
         showQuestionPopup = true
@@ -486,5 +465,32 @@ extension String {
     func removePrefix(_ prefix: String) -> String {
         guard self.hasPrefix(prefix) else { return self }
         return String(self.dropFirst(prefix.count))
+    }
+}
+
+
+
+class APIHelper {
+    static func callSpeechHelpAPI(inputText: String) async -> String {
+        guard let url = URL(string: "https://jf7n4wdqn1.execute-api.us-east-1.amazonaws.com/dev/speechHelp?prompt=\(inputText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")") else {
+            return ""
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(for: request)
+            if let jsonResponse = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+               let body = jsonResponse["body"] as? [String: Any],
+               let generations = body["generations"] as? [[String: Any]],
+               let text = generations.first?["text"] as? String {
+                return text
+            }
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        return ""
     }
 }
