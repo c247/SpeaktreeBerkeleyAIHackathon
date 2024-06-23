@@ -18,7 +18,7 @@
 - **Backend**: Utilized AWS Bedrock for the model and exposed an API endpoint using AWS Lambda and API Gateway. Also integrated OpenAI API. This allows the user to select from a host of models and select the one they like best.
 - **Frontend**: Built the mobile app natively using Xcode, Swift, and SwiftUI, ensuring a seamless and responsive user interface. Integrated Face ID for authentication.
 
-## 🏃 Challenges we ran into
+## 🏃 Challenges I ran into
 - **Low-Latency Speech to Text**: Ensuring real-time speech processing was a challenge. Instead of using a speech to text API which was too slow, I utilized the SF Speech Recognizer (iOS native), which processes speech on-device quickly and efficiently. This significantly improved the app's ability to provide real-time suggestions without lag.
 
 ## 🎉 Accomplishments that I'm proud of
