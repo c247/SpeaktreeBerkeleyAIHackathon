@@ -1,5 +1,5 @@
 # Speaktree AI
-Devpost: https://devpost.com/software/speaktree-ai-real-time-speech-enhancement?ref_content=user-portfolio&ref_feature=in_progress
+Devpost: https://devpost.com/software/speaktree-ai-real-time-speech-enhancement
 Demo: https://youtu.be/cVlM5wfbrfc
 ![Alt text](demo.png)
 
