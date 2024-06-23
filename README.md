@@ -1,5 +1,6 @@
 # Speaktree AI
 
+demo video: https://youtu.be/cVlM5wfbrfc
 ![Alt text](demo.png)
 
 
