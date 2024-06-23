@@ -21,8 +21,8 @@
 ## 🏃 Challenges I ran into
 - **Low-Latency Speech to Text**: Ensuring real-time speech processing was a challenge. Instead of using a speech to text API which was too slow, I utilized the SF Speech Recognizer (iOS native), which processes speech on-device quickly and efficiently. This significantly improved the app's ability to provide real-time suggestions without lag.
 
-## 🎉 Accomplishments that I'm proud of
-- **Fast Model Querying to Support Real-Time Assistance**: One of the biggest challenges was ensuring the app could process speech and provide suggestions in real-time without lag. We solved this by implementing dynamic model selection (**efficient using bedrock**), allowing users to choose the most suitable model based on the contents of their conversation, as different language models excel at different tasks. This ensures quick and relevant feedback tailored to the user's needs.
+## 🎉 Accomplishments
+- **Fast Model Querying to Support Real-Time Assistance**: One of the biggest challenges was ensuring the app could process speech and provide suggestions in real-time without lag. I solved this by implementing dynamic model selection (**efficient using bedrock**), allowing users to choose the most suitable model based on the contents of their conversation, as different language models excel at different tasks. This ensures quick and relevant feedback tailored to the user's needs.
 
 ## 📚 What I learned
 - Throughout the development of Speaktree AI, I realized that different language models excel at different tasks. This understanding was crucial in designing the app to leverage the strengths of various models effectively. Additionally, I discovered the **power of AWS Bedrock** and ecosystem in enabling efficient utilization of these different models within the app.
